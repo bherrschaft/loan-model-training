@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
+import pickle
 
 # Load the dataset
 print("Loading data from data/synthetic_loan_data.csv...")
@@ -42,9 +43,12 @@ print(classification_report(y_test, y_pred))
 print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
 
-# Save the model and scaler
-import joblib
-joblib.dump(model, 'models/logistic_model.pkl')
-joblib.dump(scaler, 'models/scaler.pkl')
+# Save the model and scaler using pickle
+with open('models/logistic_model.pkl', 'wb') as f:
+    pickle.dump(model, f)
+
+with open('models/scaler.pkl', 'wb') as f:
+    pickle.dump(scaler, f)
+
 print("\nModel saved as 'models/logistic_model.pkl'")
 print("Scaler saved as 'models/scaler.pkl'")
